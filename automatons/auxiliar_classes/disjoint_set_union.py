@@ -1,6 +1,6 @@
 from .complete_afd import CompleteAFD as CompleteAFD
 
-NO_PARENT = '-1'
+NO_PARENT = -1
 
 
 class State:
@@ -8,14 +8,14 @@ class State:
 
     def __init__(self, final: bool, initial: bool) -> None:
         """Guarda si un el estado es final, inicial y quien es su padre"""
+        # Al principio todos son su propio padre
         self.parent = NO_PARENT
         self.final = final
         self.initial = initial
 
 
 class StateDisjointSetUnion:
-    """
-    Clase para unir los estados no distinguibles
+    """Clase para unir los estados no distinguibles
     """
 
     # Comenzamos con todos distinguibles
@@ -51,10 +51,10 @@ class StateDisjointSetUnion:
     # Devuelve un diccionario que lleva a los representates
     # a una cadena que representa el nuevo estado
 
-    def dic_representative_to_string(self) -> dict:
-        """Devolvemos un diccionario que lleve un estado a su clase en forma de cadena
-        El objeto al que lleva cada estado tiene un string con todos los estados de la
-        clase entre corchetes, y un par de booleanos para comprobar que es final o inicial.
+    def dic_representative_to_new_state(self) -> dict:
+        """Devolvemos un diccionario que lleve un estado a su clase en forma de cadena.
+        El objeto al que lleva cada representate tiene un string con todos los estados de la
+        clase entre corchetes, y un par de booleanos para comprobar si es final o inicial.
         """
         # dic_ret es el diccionario que vamos a devolver
         dic_ret = {}
@@ -70,7 +70,8 @@ class StateDisjointSetUnion:
                     'final': self.dic[key].final,
                     'initial': self.dic[key].initial
                 }
-                # Para cada representante guaramos una lista vacía
+                # Para cada representante guardamos una lista vacía
+                dic_list[key] = []
         # Guardamos cada estado key en la lista de su representante
         for key in self.dic.keys():
             dic_list[self.get_representative(key)].append(key)

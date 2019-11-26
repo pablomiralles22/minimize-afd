@@ -43,7 +43,9 @@ def triangular_table(complete_automaton: CompleteAFD) -> dict:
 
 
 def minimize(automaton) -> None:
-    # Completamos el autómata
+    # Completamos el autómata a través de una clase wrapper que nos
+    # abstrae de lo que hace y nos proporciona las mismas funciones
+    # que un autómata normal.
     complete_automaton = CompleteAFD(automaton)
     # Obtenemos una lista con los estados accesibles
     accessible_states = complete_automaton.get_accessible_states_list()
@@ -58,7 +60,7 @@ def minimize(automaton) -> None:
                 dsu.join(q_a, q_b)
     # Usamos un diccionario que lleve cada representante de su clase de
     # equivalencia a su nuevo estado
-    dic_representatives = dsu.dic_representative_to_string()
+    dic_representatives = dsu.dic_representative_to_new_state()
     # Formamos la tabla
     # La primera fila es el encabezado
     header = ['Name']

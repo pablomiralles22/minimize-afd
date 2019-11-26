@@ -3,7 +3,7 @@ from sys import stderr
 from automatons.minimize import minimize
 
 if __name__ == '__main__':
-    path = r'./pruebas/proResuelto-minimizar.jff'
+    path = input('Introduzca un autómata:')
     try:
         automaton = Afd(path)
     except FileNotFoundError:
